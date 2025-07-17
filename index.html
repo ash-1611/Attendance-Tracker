@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Attendance Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #f0f2f5;
+      --text: #1f1f1f;
+      --card: #ffffff;
+      --primary: #2979ff;
+      --accent: #e3f2fd;
+      --table-header: #1565c0;
+    }
+
+    body.dark {
+      --bg: #121212;
+      --text: #e0e0e0;
+      --card: #1e1e1e;
+      --primary: #82b1ff;
+      --accent: #2c2c2c;
+      --table-header: #333;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 30px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: var(--card);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .dark-mode-toggle {
+      text-align: right;
+      margin-bottom: 15px;
+    }
+
+    .input-section label {
+      display: block;
+      margin: 12px 0;
+      font-weight: 600;
+    }
+
+    input[type="date"], input[type="number"] {
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 5px;
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    button {
+      padding: 10px 18px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #1c54b2;
+    }
+
+    .summary {
+      margin-top: 20px;
+      background: var(--accent);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .summary p {
+      margin: 8px 0;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    thead {
+      background: var(--table-header);
+      color: white;
+    }
+
+    .actions button {
+      margin: 0 5px;
+      font-size: 1rem;
+      padding: 6px 10px;
+    }
+
+    #attendanceChart {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📘 Attendance Tracker</h1>
+
+    <label class="dark-mode-toggle">
+      <input type="checkbox" id="darkModeToggle"> Dark Mode
+    </label>
+
+    <div class="input-section">
+      <label>Date: <input type="date" id="date" /></label>
+      <label>Lectures Today: <input type="number" id="total" min="1" /></label>
+      <label>Attended: <input type="number" id="attended" min="0" /></label>
+      <button onclick="addOrUpdateRecord()">💾 Save</button>
+    </div>
+
+    <div class="summary">
+      <p>Total Lectures: <span id="totalLectures">0</span></p>
+      <p>Lectures Attended: <span id="attendedLectures">0</span></p>
+      <p>Attendance Percentage: <span id="percentage">0%</span></p>
+      <p>Lectures Needed for 75%: <span id="needed">0</span></p>
+      <p id="lecturesRemaining" style="font-weight: bold;"></p>
+    </div>
+
+    <button onclick="downloadCSV()">📥 Export CSV</button>
+    <button onclick="resetData()">🧹 Reset All</button>
+
+    <h3 style="text-align:center; margin-top: 30px;">📅 Records</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Lectures</th>
+          <th>Attended</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="recordTable"></tbody>
+    </table>
+
+    <canvas id="attendanceChart" height="200"></canvas>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

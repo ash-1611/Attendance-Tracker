@@ -1,0 +1,96 @@
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --card: #f4f8fb;
+  --primary: #0066cc;
+  --table-header: #0066cc;
+}
+
+body.dark {
+  --bg: #1e1e1e;
+  --text: #f1f1f1;
+  --card: #2c2c2c;
+  --primary: #3399ff;
+  --table-header: #444;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: var(--card);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h1, h3 {
+  text-align: center;
+  color: var(--primary);
+}
+
+.input-section label {
+  display: block;
+  margin: 10px 0;
+}
+
+input {
+  padding: 6px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #0055aa;
+}
+
+.summary p {
+  margin: 8px 0;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+thead {
+  background: var(--table-header);
+  color: white;
+}
+
+.actions button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  font-size: 0.9em;
+}
+
+.dark-mode-toggle {
+  text-align: right;
+  margin-bottom: 10px;
+}
