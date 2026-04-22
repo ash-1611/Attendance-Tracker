@@ -1,0 +1,47 @@
+@import './variables.css';
+
+.student-attendance-card {
+  margin-bottom: var(--spacing-xl);
+}
+
+.student-attendance-form .form-row {
+  margin-bottom: var(--spacing-md);
+}
+
+.student-attendance-form .form-row.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.student-attendance-form .form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.student-attendance-form input[type='date'],
+.student-attendance-form input[type='number'] {
+  width: 100%;
+}
+
+.quick-fill {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.student-attendance-form .hint {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (max-width: 600px) {
+  .student-attendance-form .form-row.two-col {
+    grid-template-columns: 1fr;
+  }
+}
