@@ -1,15 +1,18 @@
 import axios from 'axios';
-
-// Prefer explicit env config; fallback to relative `/api` so CRA proxy can route in dev.
-const API_URL = process.env.REACT_APP_API_URL || '/api';
+import { API_BASE_URL, API_URL } from '../config/api';
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: API_BASE_URL,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+if (!API_URL) {
+  // eslint-disable-next-line no-console
+  console.warn('REACT_APP_API_URL is not defined. API requests will fail until it is configured.');
+}
 
 // Request interceptor - add token to headers
 api.interceptors.request.use(

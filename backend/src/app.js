@@ -17,32 +17,9 @@ app.set('trust proxy', 1);
 // Security Middleware
 app.use(helmet());
 
-// CORS (fix preflight 403 / access control errors)
 app.use(
   cors({
-    origin: (origin, cb) => {
-      // In development, allow localhost origins (any port) + non-browser clients.
-      if (process.env.NODE_ENV === 'development') {
-        if (!origin) return cb(null, true);
-        const isLocalhost =
-          /^http:\/\/localhost:\d+$/.test(origin) || /^http:\/\/127\.0\.0\.1:\d+$/.test(origin);
-        if (isLocalhost) return cb(null, true);
-      }
-
-      const allowedOrigins = [
-        process.env.FRONTEND_URL,
-        process.env.FRONTEND_URL_2,
-        'http://localhost:3000',
-        'http://127.0.0.1:3000',
-        'http://localhost:5173',
-        'http://127.0.0.1:5173',
-      ].filter(Boolean);
-
-      // allow non-browser clients (no Origin header)
-      if (!origin) return cb(null, true);
-      if (allowedOrigins.includes(origin)) return cb(null, true);
-      return cb(new Error(`CORS blocked for origin: ${origin}`));
-    },
+    origin: '*',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
